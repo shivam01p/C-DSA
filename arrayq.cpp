@@ -87,7 +87,7 @@ void insArray(int a[], int sza, int b[], int szb){
             if(a[i] == b[j]){
                 
                 flag = true;
-                cout << a[i] << " ";
+                cout << a[i] ;
 
             }
 
