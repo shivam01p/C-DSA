@@ -101,6 +101,45 @@ void insArray(int a[], int sza, int b[], int szb){
 
 }
 
+//todo: Maximum subarray sum (Time complexity is O(n^3))
+
+int mSS1(int a[], int sz){
+
+    int maxSum = INT_MIN;
+
+    for(int st=0; st<sz; st++){
+
+        for(int end=st; end<sz; end++){
+
+            int cursum = 0;
+            for(int k=st; k<=end; k++){
+
+                cursum += a[k];
+            }
+            maxSum = max(maxSum, cursum);
+        }
+    }
+    return maxSum;
+}
+
+//? Another way to print Maximum subarray sub (the easiest way is in the vector.cpp file)
+
+int mSS2(int a[], int sz){
+
+    int maxSum = INT_MIN;
+
+    for(int st=0; st<sz; st++){
+
+        int curSum = 0;
+        for(int end=st; end<sz; end++){
+
+            curSum += a[end];                           //? Here we don't have to do sum of those num which is already done 
+            maxSum = max(maxSum, curSum);
+        }
+    }
+    return maxSum;
+}
+
 int main(){
 
     // int a[] = {30, 20, 40, 10, 50, 60};
@@ -125,20 +164,27 @@ int main(){
 
 //todo: Subarray (kadane's algorithm)
 
-    int n = 5;
-    int a[] = {1, 2, 3, 4, 5};
+    // int n = 5;
+    // int a[] = {1, 2, 3, 4, 5};
 
-    for(int st = 0; st < n; st++){
+    // for(int st = 0; st < n; st++){
 
-        for(int end = st; end < n; end++){
+    //     for(int end = st; end < n; end++){
 
-            for(int i = st; i <= end; i++){
-                cout << a[i];
-            }
-            cout << " ";
-        }
-        cout << endl;
-    }
+    //         for(int i = st; i <= end; i++){
+    //             cout << a[i];
+    //         }
+    //         cout << " ";
+    //     }
+    //     cout << endl;
+    // }
+
+//todo: Maximum subarray sum
+
+    int ar[] = {3, 2, -6, 9, 1, -2, 5};
+    int sz = sizeof(ar) / sizeof(int);
+    cout << mSS1(ar, sz) << "\n";
+    cout << mSS2(ar, sz);
 
     return 0;
 }
