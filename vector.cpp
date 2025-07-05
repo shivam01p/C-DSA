@@ -1,4 +1,5 @@
 #include <iostream>
+#include <climits>
 #include <vector>
 
 using namespace std;
@@ -33,6 +34,23 @@ void reverseVc(vector<int> &vc){                                  //? Here if we
     cout << endl;
 }
 
+//todo: Kadane's algorithm to find maximum subarray sum
+
+int kMSS(vector<int> &vc){
+
+    int curSum = 0, maxSum = INT_MIN;
+    for(int val: vc){
+
+        curSum += val;
+        maxSum = max(maxSum, curSum);
+        
+        if(curSum < 0){
+            curSum = 0;
+        }
+    }
+    return maxSum;
+}
+
 int main(){
 
     // std::cout << __cplusplus << std::endl;                      //? to print std of the c++
@@ -54,12 +72,15 @@ int main(){
     // int target = 23;;
     // cout << linearS(vc, target);
 
-    vector<int> vc = {1, 2, 3, 4, 5};
-    reverseVc(vc);
+    // vector<int> vc = {1, 2, 3, 4, 5};
+    // reverseVc(vc);
 
-    for(int i : vc){
-        cout << i << " ";
-    }
+    // for(int i : vc){
+    //     cout << i << " ";
+    // }
+
+    vector<int> vc = {3, 2, -6, 9, 1, -2, 5};
+    cout << kMSS(vc);
 
     return 0;
 }
