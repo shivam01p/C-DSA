@@ -51,6 +51,27 @@ int kMSS(vector<int> &vc){
     return maxSum;
 }
 
+//todo: Pair sum
+
+vector<int> pairS(vector<int> vc, int target){
+
+    vector<int> ans;
+    int sz = vc.size();
+    for(int i=0; i<sz; i++){
+
+        for(int j=i+1; j<sz; j++){
+
+            if(vc[i] + vc[j] == target){
+                
+                ans.push_back(i);
+                ans.push_back(j);
+                return ans;
+            }
+        }
+    }
+    return ans;
+}
+
 int main(){
 
     // std::cout << __cplusplus << std::endl;                      //? to print std of the c++
@@ -80,7 +101,10 @@ int main(){
     // }
 
     vector<int> vc = {3, 2, -6, 9, 1, -2, 5};
-    cout << kMSS(vc);
+    // cout << kMSS(vc);
+
+    vector<int> ans =  pairS(vc, 10);
+    cout << "indices are = " << ans[0] << " & " << ans[1];
 
     return 0;
 }
