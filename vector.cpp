@@ -72,6 +72,37 @@ vector<int> pairS(vector<int> vc, int target){
     return ans;
 }
 
+//? another method
+
+vector<int> ps(vector<int> vc, int target){
+
+    int sz = vc.size();
+    vector<int> ans;
+    int i = 0, j = sz-1;
+
+    while(i<j){
+
+        int pairSum = vc[i] + vc[j];
+
+        if(pairSum < target){
+
+            i++;
+
+        }else if(pairSum > target){
+
+            j--;
+
+        }else{
+
+            ans.push_back(i);
+            ans.push_back(j);
+            return ans;
+            
+        }
+    }
+    
+}
+
 int main(){
 
     // std::cout << __cplusplus << std::endl;                      //? to print std of the c++
