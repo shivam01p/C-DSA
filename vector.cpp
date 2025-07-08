@@ -1,6 +1,7 @@
 #include <iostream>
 #include <climits>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
  
@@ -99,13 +100,83 @@ vector<int> ps(vector<int> vc, int target){
             return ans;
             
         }
+    } 
+    return ans;
+}
+
+//todo: Function for majority element (brute force method) [Here we are assuming that element is always exist which is (>n/2)]
+
+int majE1(vector<int> nums){
+
+    int n = nums.size();
+    int ans;
+    for(int val : nums){                                //? Point to the first element
+
+        int freq = 0;
+        for(int el : nums){                             //? Traverse whole vector and check how many time val is present by increasing freq
+           
+            if(el == val){
+                freq++;
+            }
+        }
+
+        if(freq > n/2){
+            ans = val;
+            return ans;
+        }
     }
-    
+    return ans;
+}
+
+//? Using sorting
+
+int majE2(vector<int> vc){
+
+    int ans = vc[0];
+    int freq = 1;
+    int sz = vc.size();
+    sort(vc.begin(), vc.end());
+
+    for(int i = 1; i < sz; i++){
+
+        if(vc[i] == vc[i-1]){
+            freq++;
+        }else{
+            freq = 1;
+            ans = vc[i];
+        }
+
+        if(freq > sz/2){
+            return ans;
+        }
+    }
+    return -1;
+}
+
+//todo:  moore's voting algorithm
+
+int majE3(vector<int> vc){
+
+    int freq = 0;
+    int ans = 0;
+
+    for(int i = 0; i<vc.size(); i++){
+
+        if(freq == 0){
+            ans = vc[i];
+        }
+        if(vc[i] == ans){
+            freq++;
+        }else{
+            freq--;
+        }
+    }
+    return ans;
 }
 
 int main(){
 
-    // std::cout << __cplusplus << std::endl;                      //? to print std of the c++
+    // cout << __cplusplus << endl;                                //? to print std of the c++
     // vector<int> vect;                                           //? Initializtion of vector
     // vector<int> vec(3,2);
     // vector<int> vc = {3, 5, 2};
@@ -131,11 +202,14 @@ int main(){
     //     cout << i << " ";
     // }
 
-    vector<int> vc = {3, 2, -6, 9, 1, -2, 5};
+    // vector<int> vc = {3, 2, -6, 9, 1, -2, 5};
     // cout << kMSS(vc);
 
-    vector<int> ans =  pairS(vc, 10);
-    cout << "indices are = " << ans[0] << " & " << ans[1];
+    // vector<int> ans =  pairS(vc, 10);
+    // cout << "indices are = " << ans[0] << " & " << ans[1];
+
+    vector<int> a = {2, 2, 1, 3, 5, 7, 2, 2, 2, 2};
+    cout << majE3(a);
 
     return 0;
 }
